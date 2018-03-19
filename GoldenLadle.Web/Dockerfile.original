@@ -1,0 +1,11 @@
+FROM microsoft/aspnetcore:2.0-sdk AS base
+WORKDIR /dir
+
+COPY *.csproj ./
+RUN dotnet restore
+
+COPY . ./
+RUN dotnet publish -c Release -o /app
+ENTRYPOINT ["dotnet", "out/GoldenLadle.Web.dll"]
+
+RUN dotnet build -c Release -o /app

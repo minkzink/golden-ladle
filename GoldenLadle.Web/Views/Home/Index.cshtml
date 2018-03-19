@@ -1,0 +1,68 @@
+﻿@using GoldenLadle.Models;
+@model List<Event>
+@{
+    ViewData["Title"] = "Home Page";
+}
+</div>
+<div class="page-body">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @if (Model != null && Model.Count != 0)
+            {
+                @foreach (Event ev in Model)
+                {
+                    <div class="carousel-item active">
+                        <div class="img"><img style="min-height: 78vh; min-width: 100%;" src='/images/@ev.FilePaths.First(f => f.FileType == FileType.Header).FileName' alt="@ev.Name"></div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1 class="text-dark">@ev.Name</h1>
+                                    <h4 class="text-muted">@ev.Description</h4>
+                                    @if (DateTime.Now < ev.StartDT)
+                                    {
+                                        <h2 class="text-dark">Voting has not opened yet.<br />Voting will open at @ev.StartDT</h2>
+                                    }
+                                    else if (DateTime.Now > ev.EndDT)
+                                    {
+                                        <br /><p>&nbsp;</p>
+                                        <h3 class="text-dark">Voting has Closed. And the Winner is:</h3>
+                                        @foreach(Entry entry in ev.Entries.OrderByDescending(en => en.Value).Take(3))
+                                        {
+                                            <h4 class="text-dark"> @entry.Name</h4>
+                                        }
+                                    }
+                                    else
+                                    {
+                                         <a class="btn btn-success btn-lg" href="~/Events/Details/@ev.Id">Click Here To Vote</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.Count() > 1)
+                {
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                }
+            }
+            else
+            {
+                <div class="row page-start" style="min-height:77.333vh; padding-top: 3rem;">
+                    <div class="col-sm-12 col-md-4"></div>
+                    <div class="col-sm-12 col-md-4">
+                        <img class="mx-auto d-block" src="~/images/sadface.png" />
+                        <h1 class="text-center">Well... this is Embarrassing...</h1>
+                        <h3 class="text-center">No events have been created yet.</h3>
+                    </div>
+                    <div class="col-sm-12 col-md-4"></div>
+                </div>
+            }
+    </div>
+</div>

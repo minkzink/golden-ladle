@@ -1,0 +1,67 @@
+﻿@model GoldenLadle.Models.Event
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="page-body">
+    <div class="container">
+        <div class="row page-start">
+            <div class="col-sm-12 col-md-3"></div>
+            <div class="col-sm-12 col-md-6"><h2 class="text-center">Edit an Event</h2></div>
+            <div class="col-sm-12 col-md-3"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-sm-6">
+                            <label asp-for="StartDT" class="control-label"></label>
+                            <input asp-for="StartDT" id="startDT" class="form-control" />
+                            <span asp-validation-for="StartDT" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label asp-for="EndDT" class="control-label"></label>
+                            <input asp-for="EndDT" id="endDT" class="form-control" />
+                            <span asp-validation-for="EndDT" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin:2rem 0;">
+                        <p>Upload an image background for the event:</p>
+                        <input type="file" id="Header" name="upload" />
+                    </div>
+
+                    <div class="form-group form-inline">
+                        <input type="submit" value="Save" class="btn btn-outline-primary" />&nbsp;&nbsp;
+                        <a href="/Events/" class="btn btn-outline-secondary">Back to List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Stylesheets{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+}
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $("#startDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
+        $("#endDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
+    </script>
+}

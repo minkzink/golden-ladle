@@ -1,0 +1,24 @@
+﻿@using GoldenLadle.Views.Manage
+@inject SignInManager<User> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<ul class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext) nav-item" role="tab">
+        <a asp-action="Index" class="nav-link">Profile</a>
+    </li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext) nav-item" role="tab">
+        <a asp-action="ChangePassword" class="nav-link">Password</a>
+    </li>
+    @if (hasExternalLogins)
+    {
+        <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext) nav-item">
+            <a asp-action="ExternalLogins" class="nav-link">External logins</a>
+        </li>
+    }
+    <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext) nav-item" role="tab">
+        <a asp-action="TwoFactorAuthentication" class="nav-link">Two-factor authentication</a>
+    </li>
+</ul>
+

@@ -1,0 +1,26 @@
+services:
+  goldenladle.web:
+    build:
+      context: C:\Users\brinehart\Documents\Projects\GoldenLadle
+      dockerfile: GoldenLadle.Web/Dockerfile
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: goldenladleweb:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp2.0/GoldenLadle.dll'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/bash -c "if PID=$$(pidof
+        -x dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - 80/tcp
+    volumes:
+    - /c/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web:/app:rw
+    - /c/Users/brinehart/vsdbg/vs2017u5:/remote_debugger:ro
+    - /c/Program Files/dotnet/sdk/NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+    - /c/Users/brinehart/.nuget/packages:/root/.nuget/packages:ro
+version: '3.0'

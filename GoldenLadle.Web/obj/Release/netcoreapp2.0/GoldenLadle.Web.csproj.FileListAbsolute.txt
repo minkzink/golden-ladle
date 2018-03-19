@@ -1,0 +1,12 @@
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\bin\Release\netcoreapp2.0\GoldenLadle.deps.json
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\bin\Release\netcoreapp2.0\GoldenLadle.runtimeconfig.json
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\bin\Release\netcoreapp2.0\GoldenLadle.runtimeconfig.dev.json
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\bin\Release\netcoreapp2.0\GoldenLadle.dll
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\bin\Release\netcoreapp2.0\GoldenLadle.pdb
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\GoldenLadle.Web.csprojResolveAssemblyReference.cache
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\GoldenLadle.Web.csproj.CoreCompileInputs.cache
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\GoldenLadle.Web.AssemblyInfoInputs.cache
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\GoldenLadle.Web.AssemblyInfo.cs
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\GoldenLadle.dll
+C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web\obj\Release\netcoreapp2.0\GoldenLadle.pdb

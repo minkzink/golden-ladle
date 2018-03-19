@@ -1,0 +1,39 @@
+﻿@model GoldenLadle.Models.Entry
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-body">
+    <div class="container">
+        <div class="row page-start">
+            <div class="col-sm-12 col-md-3"></div>
+            <div class="col-sm-12 col-md-6"><h2 class="text-center">Submit A New Entry</h2></div>
+            <div class="col-sm-12 col-md-3"></div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="EventId" hidden />
+                    <input asp-for="UserId" hidden />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <input type="submit" value="Create" class="btn btn-outline-success" />&nbsp;&nbsp;
+                        <a href="/Events/Details/@Model.EventId" class="btn btn-outline-secondary">Back to Event</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
