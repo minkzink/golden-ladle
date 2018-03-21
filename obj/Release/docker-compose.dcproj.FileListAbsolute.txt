@@ -1,0 +1,1 @@
+/Users/avisoftware/repo/golden-ladle/obj/Release/docker-compose.dcproj.CoreCompileInputs.cache

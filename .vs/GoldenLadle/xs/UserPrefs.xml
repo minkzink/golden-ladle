@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{7B669830-2624-4696-9632-04AAF905FCA3}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers Status">
+    <Files>
+      <File FileName="GoldenLadle.Web/Controllers/EventsController.cs" Line="79" Column="49" />
+      <File FileName="Controllers Status" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/EventsController.cs" relfile="GoldenLadle.Web/Controllers/EventsController.cs" line="203" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

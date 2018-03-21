@@ -42,7 +42,7 @@ namespace GoldenLadle.Data.Repos
                 .ToListAsync();
         }
 
-        public async void AddAsync(Event @event)
+        public async Task AddAsync(Event @event)
         {
             var e = SetDates(@event, SaveType.Add);
             await Context.Set<Event>().AddAsync(e);

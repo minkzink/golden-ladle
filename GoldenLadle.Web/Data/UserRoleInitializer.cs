@@ -37,27 +37,12 @@ namespace GoldenLadle.Data
         }
         public static void SeedUsers(UserManager<User> userManager)
         {
-            if (userManager.FindByNameAsync("user").Result == null)
-            {
-                User user = new User();
-                user.UserName = "user@example.com";
-                user.Email = "user@example.com";
-                user.FirstName = "John";
-                user.LastName = "Smith";
-
-                IdentityResult result = userManager.CreateAsync(user, "AVI4lyfe$").Result;
-
-                if (result.Succeeded)
-                {
-                    userManager.AddToRoleAsync(user, "NormalUser").Wait();
-                }
-            }
 
             if (userManager.FindByNameAsync("admin").Result == null)
             {
                 User user = new User();
-                user.UserName = "admin@example.com";
-                user.Email = "admin@example.com";
+                user.UserName = "brinehart@avifoodsystems.com";
+                user.Email = "brinehart@avifoodsystems.com";
                 user.FirstName = "Ben";
                 user.LastName = "Rinehart";
 

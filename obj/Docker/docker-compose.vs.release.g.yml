@@ -1,9 +1,9 @@
-version: '3'
+version: '3.4'
 
 services:
   goldenladle.web:
     volumes:
-      - C:\Users\brinehart\vsdbg\vs2017u5:/remote_debugger:ro
+      - /Users/avisoftware/.vsdbg/vs2017u5:/remote_debugger:ro
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"

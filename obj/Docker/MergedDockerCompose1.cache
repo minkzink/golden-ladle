@@ -1,14 +1,15 @@
 services:
   goldenladle.web:
     build:
-      context: C:\Users\brinehart\Documents\Projects\GoldenLadle
+      context: /Users/avisoftware/repo/golden-ladle
       dockerfile: GoldenLadle.Web/Dockerfile
+      target: base
     entrypoint: tail -f /dev/null
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       DOTNET_USE_POLLING_FILE_WATCHER: '1'
       NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
-    image: goldenladleweb:dev
+    image: goldenladle:dev
     labels:
       com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
         --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp2.0/GoldenLadle.dll'
@@ -17,10 +18,10 @@ services:
       com.microsoft.visualstudio.debuggee.program: dotnet
       com.microsoft.visualstudio.debuggee.workingdirectory: /app
     ports:
-    - 80/tcp
+    - target: 80
     volumes:
-    - /c/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web:/app:rw
-    - /c/Users/brinehart/vsdbg/vs2017u5:/remote_debugger:ro
-    - /c/Program Files/dotnet/sdk/NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
-    - /c/Users/brinehart/.nuget/packages:/root/.nuget/packages:ro
-version: '3.0'
+    - /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web:/app:rw
+    - /Users/avisoftware/.vsdbg/vs2017u5:/remote_debugger:ro
+    - /usr/local/share/dotnet/sdk/NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+    - /Users/avisoftware/.nuget/packages:/root/.nuget/packages:ro
+version: '3.4'

@@ -1,0 +1,107 @@
+﻿/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+.carousel-item {
+    max-height: 617px !important;
+}
+
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: initial;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.event-header, 
+.page-body {
+    min-height: 77.333vh;
+}
+
+.event-header,
+.page-start{
+    padding-top: 1rem;
+}
+
+h1 { font-size: 3.5rem; }
+
+h1, h2, h3 { font-family: 'Anton', sans-serif; }
+
+h4, h5, h6, p, a { font-family: 'Oswald', sans-serif; }
+
+h1.shadow,
+h2.shadow,
+h3.shadow,
+h4.shadow,
+h5.shadow,
+h6.shadow,
+p.shadow,
+a.shadow {
+    text-shadow: 0 2px 0 rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.1), 0 12px 18px rgba(0,0,0,0.1);
+}
+
+.card {
+    background-color: rgba(245, 245, 245, 0.9);
+}
+
+.page-footer{
+    padding-top: 1.8vh;
+    padding-bottom: 1vh;
+    background-color: #2e2e2e;
+}
+
+.discuss{
+    margin-bottom: 1rem;
+}
+
+.discuss-body{
+    padding-top: 1.45rem;
+}
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+.navbar-brand {
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+}
+
+span#logo {
+    padding-left: 14px;
+}
+
+@media screen and (min-width: 768px){
+    #uploadFile {
+        min-width: 57rem;
+    }
+}
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+div#event {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
