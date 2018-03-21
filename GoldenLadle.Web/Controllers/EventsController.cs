@@ -84,7 +84,7 @@ namespace GoldenLadle.Controllers
                         await upload.CopyToAsync(stream);
                     }
                 }
-                _unitOfWork.Events.AddAsync(@event);
+                await _unitOfWork.Events.AddAsync(@event);
                 _unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
