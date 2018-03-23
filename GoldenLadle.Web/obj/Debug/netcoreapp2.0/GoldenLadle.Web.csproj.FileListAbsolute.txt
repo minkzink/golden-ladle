@@ -29,3 +29,4 @@ C:/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web/obj/Debug/netc
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.Web.csproj.CoreCompileInputs.cache
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.dll
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.pdb
+/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs

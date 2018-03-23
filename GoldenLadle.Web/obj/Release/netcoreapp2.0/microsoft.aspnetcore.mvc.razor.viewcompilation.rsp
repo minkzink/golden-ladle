@@ -25,8 +25,6 @@
 --file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Events/Details.cshtml
 --file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Events/Edit.cshtml
 --file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Events/Index.cshtml
---file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Home/About.cshtml
---file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Home/Contact.cshtml
 --file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Home/Index.cshtml
 --file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Manage/ChangePassword.cshtml
 --file=/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Views/Manage/Disable2fa.cshtml

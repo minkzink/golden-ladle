@@ -19,3 +19,4 @@ C:/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web/obj/Release/ne
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Release/netcoreapp2.0/GoldenLadle.Web.csproj.CoreCompileInputs.cache
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Release/netcoreapp2.0/GoldenLadle.dll
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Release/netcoreapp2.0/GoldenLadle.pdb
+/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Release/netcoreapp2.0/UserSecretsAssemblyInfo.cs

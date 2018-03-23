@@ -6,3 +6,12 @@ services:
     build:
       context: .
       dockerfile: GoldenLadle.Web/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - USER_SECRETS_ID=fa30cacd-05d3-452e-a3aa-a71b18b1e9cf
+    ports:
+      - "80"
+    volumes:
+      - $APPDATA/Microsoft/UserSecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
+      - $HOME/.microsoft/usersecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
+      - ./webapp:/opt/webapp

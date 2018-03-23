@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "7c20801fe6354a54f953cde8fe6a0e3ce3c7c0f9"
+    "signature": "419a12ec0c6cddcfdbedf3304f6583dfbd06c7d1"
   },
   "compilationOptions": {
     "defines": [
@@ -23,6 +23,7 @@
     ".NETCoreApp,Version=v2.0": {
       "GoldenLadle/1.0.0": {
         "dependencies": {
+          "CloudinaryDotNet": "1.2.0",
           "Microsoft.AspNetCore.All": "2.0.6",
           "Microsoft.EntityFrameworkCore": "2.0.2",
           "Microsoft.EntityFrameworkCore.Relational": "2.0.2",
@@ -34,6 +35,14 @@
         },
         "compile": {
           "GoldenLadle.dll": {}
+        }
+      },
+      "CloudinaryDotNet/1.2.0": {
+        "runtime": {
+          "lib/netstandard1.3/CloudinaryDotNet.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.3/CloudinaryDotNet.dll": {}
         }
       },
       "Libuv/1.10.0": {
@@ -3988,6 +3997,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CloudinaryDotNet/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vDVJphErvptCVvDTaLnIs5yxWRmCA7nB2EOMiFK2+Yjc9aBL/InKvKgEQJtYJ08XfiwaPUkYcS1qVqCbMYTOcg==",
+      "path": "cloudinarydotnet/1.2.0",
+      "hashPath": "cloudinarydotnet.1.2.0.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",
