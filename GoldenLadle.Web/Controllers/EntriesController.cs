@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using GoldenLadle.Data;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GoldenLadle.Controllers
 {
@@ -20,12 +21,14 @@ namespace GoldenLadle.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Entries
         public async Task<IActionResult> Index()
         {
             return View(await _unitOfWork.Entries.GetAllAsync());
         }
 
+        [Authorize(Roles = "Admin, NormalUser")]
         // GET: Entries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,6 +46,7 @@ namespace GoldenLadle.Controllers
             return View(entry);
         }
 
+        [Authorize(Roles = "Admin, NormalUser")]
         // GET: Entries/Create
         public IActionResult Create(int eventId)
         {
@@ -68,9 +72,10 @@ namespace GoldenLadle.Controllers
                 await _unitOfWork.CompleteAsync();
                 return RedirectToAction("Details", "Events", new { id = entry.EventId });
             }
-            return RedirectToAction("Details", "Events", new { id = entry.EventId } );
+            return RedirectToAction("Details", "Events", new { id = entry.EventId });
         }
 
+        [Authorize(Roles = "Admin, NormalUser")]
         // GET: Entries/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -122,6 +127,7 @@ namespace GoldenLadle.Controllers
             return View(entry);
         }
 
+        [Authorize(Roles = "Admin, NormalUser")]
         // GET: Entries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

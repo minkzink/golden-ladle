@@ -34,7 +34,7 @@ else
     <div class="card border-dark mb-3" style="width: 22rem;">
         @if (e.FilePaths.Any(f => f.FileType == FileType.Header))
         {
-            <img class="card-img-top" src="~/images/@e.FilePaths.First(f => f.FileType == FileType.Header).FileName" alt="Card image cap">
+            <img class="card-img-top" src="@e.FilePaths.First(f => f.FileType == FileType.Header).ThumbName" alt="Card image cap">
         }
         else
         {

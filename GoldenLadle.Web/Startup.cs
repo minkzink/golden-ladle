@@ -24,8 +24,6 @@ namespace GoldenLadle
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR();
-
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
@@ -36,7 +34,7 @@ namespace GoldenLadle
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddMvc();
         }
@@ -44,11 +42,6 @@ namespace GoldenLadle
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<ChatHub>("chat");
-            });
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

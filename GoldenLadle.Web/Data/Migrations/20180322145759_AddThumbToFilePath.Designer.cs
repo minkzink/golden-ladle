@@ -12,9 +12,10 @@ using System;
 namespace GoldenLadle.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180322145759_AddThumbToFilePath")]
+    partial class AddThumbToFilePath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,8 +84,6 @@ namespace GoldenLadle.Migrations
                     .ValueGeneratedOnAdd();
 
                 b.Property<int>("EventId");
-
-                b.Property<string>("FileExt");
 
                 b.Property<string>("FileName")
                     .HasMaxLength(255);
