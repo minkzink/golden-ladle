@@ -5,15 +5,15 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>4D521D6D-4319-4EB9-BD8E-F73A68608CEF</UserSecretsId>
+    <UserSecretsId>fa30cacd-05d3-452e-a3aa-a71b18b1e9cf</UserSecretsId>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>GoldenLadle</AssemblyName>
     <RootNamespace>GoldenLadle</RootNamespace>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   
   <ItemGroup>
@@ -23,27 +23,30 @@
     <Compile Remove="Data\Migrations\20180305153316_AddBaseEntityFields.Designer.cs" />
     <Compile Remove="Data\Migrations\20180305164652_AddBaseEntityFields.cs" />
     <Compile Remove="Data\Migrations\20180305164652_AddBaseEntityFields.Designer.cs" />
+    <Compile Remove="Data\Helpers\AmazonUploader.cs" />
+    <Compile Remove="Data\UserRoleInitializer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\images\sad.png" />
+    <Content Remove="appsettings.Production.json" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
-
+    
 </Project>

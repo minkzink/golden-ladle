@@ -1,18 +1,31 @@
-﻿@using GoldenLadle.Models;
+﻿@using GoldenLadle.Models
 @model List<Event>
 @{
     ViewData["Title"] = "Home Page";
 }
 </div>
 <div class="page-body">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            @if (Model != null && Model.Count != 0)
+    <div id="carouselControls" class="carousel slide" data-ride="carousel">
+        @if((Model != null) && (Model.Count != 0))
+        {  <ul class="carousel-indicators">
+            @foreach (Event ev in Model)
             {
-                @foreach (Event ev in Model)
+                <li data-target="#carouselControls" data-slide-to="0"></li>
+            }
+            </ul>
+        }
+        <div class="carousel-inner" style="min-height: 81vh; min-width: 100%;">
+            @if((Model != null) && (Model.Count != 0))
+            {
+                foreach (Event ev in Model)
                 {
-                    <div class="carousel-item active">
-                        <div class="img"><img style="min-height: 78vh; min-width: 100%;" src='/images/@ev.FilePaths.First(f => f.FileType == FileType.Header).FileName' alt="@ev.Name"></div>
+                    <div class="carousel-item">
+                        <div class="img">
+                            @if(@ev.FilePaths.Count != 0)
+                            {
+                                <img src='@ev.FilePaths.FirstOrDefault(f => f.FileType == FileType.Header).FileName' alt="@ev.Name">
+                            }
+                        </div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="card">
                                 <div class="card-body">
@@ -26,7 +39,7 @@
                                     {
                                         <br /><p>&nbsp;</p>
                                         <h3 class="text-dark">Voting has Closed. And the Winner is:</h3>
-                                        @foreach(Entry entry in ev.Entries.OrderByDescending(en => en.Value).Take(3))
+                                        foreach(Entry entry in ev.Entries.OrderByDescending(en => en.Value).Take(3))
                                         {
                                             <h4 class="text-dark"> @entry.Name</h4>
                                         }
@@ -40,13 +53,13 @@
                         </div>
                     </div>
                 }
-                @if (Model.Count() > 1)
+                if (Model.Count() > 1)
                 {
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -66,3 +79,12 @@
             }
     </div>
 </div>
+
+@section Scripts
+    {
+        <script>
+            $(document).ready(function () {
+              $('#carouselControls').find('.carousel-item').first().addClass('active');
+            });
+        </script>
+    }

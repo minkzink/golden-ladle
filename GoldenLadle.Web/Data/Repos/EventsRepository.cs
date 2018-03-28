@@ -35,14 +35,15 @@ namespace GoldenLadle.Data.Repos
         
         public async Task<IEnumerable<Event>> GetAllAsync()
         {
-            return await Context.Set<Event>()
+            List<Event> @events = await Context.Set<Event>()
                 .Include(e => e.FilePaths)
                 .Include(e => e.Entries)
                 .OrderByDescending(f => f.StartDT)
                 .ToListAsync();
+            return @events;
         }
 
-        public async void AddAsync(Event @event)
+        public async Task AddAsync(Event @event)
         {
             var e = SetDates(@event, SaveType.Add);
             await Context.Set<Event>().AddAsync(e);
@@ -50,7 +51,7 @@ namespace GoldenLadle.Data.Repos
 
         public bool CheckIfAnyExist(int id)
         {
-            return Context.Set<Event>().Any(e => e.Id == id);
+            return Context.Set<Entry>().Any(e => e.Id == id);
         }
 
         public Event SetDates(Event entry, SaveType saveType)

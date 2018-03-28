@@ -6,7 +6,7 @@
 <input type="hidden" id="eventId" value="@Model.Id" />
 <input type="hidden" id="loggedInUser" value="@ViewBag.LoggedInUser" />
 </div>
-<div id="event" style="background: url('/images/@Model.FilePaths.First(f => f.FileType == FileType.Header).FileName') center center no-repeat;">
+<div id="event" style="background: url('@Model.FilePaths.First(f => f.FileType == FileType.Header).FileName') center center no-repeat;">
     <div class="container event-header">
         <div class="col-sm-12">
             <h1 class="text-center text-white shadow">@Html.DisplayFor(model => model.Name)</h1>
@@ -99,11 +99,23 @@
         }
         else
         {
-            <div class="row justify-content-center">
-                <div class="col-sm-12 col-md-3">
-                    @Html.ActionLink("Enter The Contest", "Create", "Entries", new { eventId = Model.Id }, new { @class = "btn btn-lg btn-block btn-success" })
+            if(this.User.IsInRole("Admin") || this.User.IsInRole("NormalUser"))
+            {
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-3">
+                        @Html.ActionLink("Enter The Contest", "Create", "Entries", new { eventId = Model.Id }, new { @class = "btn btn-lg btn-block btn-success" })
+                    </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-3">
+                        @Html.ActionLink("Login To Enter The Contest", "Login", "Account", new { eventId = Model.Id }, new { @class = "btn btn-lg btn-block btn-success" })
+                    </div>
+                </div>
+            }
+
             <div class="row justify-content-center" style="padding-top:3rem;">
                 <div class="col-sm-12 col-md-5">
                     <h3 class="text-center text-white shadow">Hello? Is there anybody out there?<br />No on has entered the contest yet!</h3>

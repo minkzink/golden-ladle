@@ -1,19 +1,21 @@
-version: '3'
+version: '3.4'
 
 services:
   goldenladle.web:
-    image: goldenladleweb:dev
+    image: goldenladle:dev
+    build:
+      target: base
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
     volumes:
-      - C:\Users\brinehart\Documents\Projects\GoldenLadle\GoldenLadle.Web:/app
-      - C:\Users\brinehart\vsdbg\vs2017u5:/remote_debugger:ro
-      - C:\Users\brinehart\.nuget\packages\:/root/.nuget/packages:ro
-      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
+      - /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web:/app
+      - /Users/avisoftware/.vsdbg/vs2017u5:/remote_debugger:ro
+      - /Users/avisoftware/.nuget/packages/:/root/.nuget/packages:ro
+      - /usr/local/share/dotnet/sdk/NuGetFallbackFolder:/root/.nuget/fallbackpackages:ro
     entrypoint: tail -f /dev/null
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
-      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  bin/Debug/netcoreapp2.0/GoldenLadle.dll"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages --additionalProbingPath /root/.nuget/fallbackpackages  bin/Release/netcoreapp2.0/GoldenLadle.dll"
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "/bin/bash -c \"if PID=$$(pidof -x dotnet); then kill $$PID; fi\""

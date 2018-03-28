@@ -1,1 +1,2 @@
-C:\Users\brinehart\Documents\Projects\GoldenLadle\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+C:/Users/brinehart/Documents/Projects/GoldenLadle/obj/Debug/docker-compose.dcproj.CoreCompileInputs.cache
+/Users/avisoftware/repo/golden-ladle/obj/Debug/docker-compose.dcproj.CoreCompileInputs.cache

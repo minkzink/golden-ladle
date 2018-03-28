@@ -7,21 +7,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GoldenLadle.Data;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Hosting;
 
 namespace GoldenLadle.Controllers
 {
-    
+
     public class EventsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IHostingEnvironment env;
+        private string _path = "";
 
-        public EventsController(IUnitOfWork unitOfWork)
+        public EventsController(IUnitOfWork unitOfWork, IHostingEnvironment env)
         {
+            this.env = env;
             _unitOfWork = unitOfWork;
         }
 
@@ -29,7 +33,7 @@ namespace GoldenLadle.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.Events.GetAllAsync());
+			return View(await _unitOfWork.Events.GetAllAsync());    
         }
 
         // GET: Events/Details/5
@@ -41,7 +45,14 @@ namespace GoldenLadle.Controllers
             }
 
             var @event = await _unitOfWork.Events.GetAsync(id);
-            ViewBag.LoggedInUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            try
+            {
+                ViewBag.LoggedInUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+            catch
+            {
+                ViewBag.LoggedInUser = "No logged in User";
+            }
 
             if (@event == null)
             {
@@ -70,21 +81,12 @@ namespace GoldenLadle.Controllers
             {
                 if (upload != null && upload.Length > 0)
                 {
-                    var image = new FilePath()
-                    {
-                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
-                        FileType = FileType.Header,
-                    };
-                    @event.FilePaths = new List<FilePath>();
+                    FilePath image = await UploadImage(@event, upload);
+
+                    DeleteTempFile(_path);
                     @event.FilePaths.Add(image);
-                    //Save the file to the images folder
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", image.FileName);
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await upload.CopyToAsync(stream);
-                    }
                 }
-                _unitOfWork.Events.AddAsync(@event);
+                await _unitOfWork.Events.AddAsync(@event);
                 _unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
@@ -125,19 +127,10 @@ namespace GoldenLadle.Controllers
             {
                 if (upload != null && upload.Length > 0)
                 {
-                    var image = new FilePath()
-                    {
-                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
-                        FileType = FileType.Header,
-                    };
-                    @event.FilePaths = new List<FilePath>();
+                    FilePath image = await UploadImage(@event, upload);
+
+                    DeleteTempFile(_path);
                     @event.FilePaths.Add(image);
-                    //Save the file to the images folder
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images", image.FileName);
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await upload.CopyToAsync(stream);
-                    }
                 }
                 try
                 {
@@ -158,6 +151,18 @@ namespace GoldenLadle.Controllers
                 return RedirectToAction("Index");
             }
             return View(@event);
+        }
+
+        private void DeleteTempFile(string path)
+        {
+            if (env.IsDevelopment() || env.IsProduction())
+            {
+                FileInfo file = new FileInfo(path);
+                if (file.Exists)//check file exsit or not
+                {
+                    file.Delete();
+                }
+            }   
         }
 
         // GET: Events/Delete/5
@@ -193,6 +198,61 @@ namespace GoldenLadle.Controllers
         private bool EventExists(int id)
         {
             return _unitOfWork.Events.CheckIfAnyExist(id);
+        }
+
+        private async Task<FilePath> UploadImage(Event @event, IFormFile upload)
+        {
+            if (env.IsDevelopment() || env.IsProduction())
+            {
+                var image = new FilePath()
+                {
+                    FileName = Guid.NewGuid().ToString() + Path.GetFileNameWithoutExtension(upload.FileName),
+                    FileType = FileType.Header,
+                    FileExt = Path.GetExtension(upload.FileName)
+                };
+                @event.FilePaths = new List<FilePath>();
+
+                _path = env.WebRootFileProvider.GetFileInfo(image.FileName).PhysicalPath;
+                using (var stream = new FileStream(_path, FileMode.Create))
+                {
+                    await upload.CopyToAsync(stream);
+                }
+                Dictionary<FileType, string> imageUrls = UploadImageToCloudinary(image);
+                image.FileName = imageUrls.FirstOrDefault(i => i.Key == FileType.Header).Value;
+                image.ThumbName = imageUrls.FirstOrDefault(i => i.Key == FileType.Thumbnail).Value;
+                return image;
+            }
+            else
+            {
+                return new FilePath();
+            }
+        }
+
+        private Dictionary<FileType, string> UploadImageToCloudinary(FilePath image)
+        {
+            Dictionary<FileType, string> paths = new Dictionary<FileType, string>();
+            Account account = new Account(
+                "dc1tgasv1",
+                "694124985656512",
+                "RtY2gs7YjWDe51V86p80oloS9gc");
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription($"wwwroot/{image.FileName}"),
+                PublicId = image.FileName,
+                Transformation = new Transformation().Width(2000).Crop("scale")
+            };
+            ImageUploadResult result = cloudinary.Upload(uploadParams);
+            paths.Add(FileType.Header, cloudinary.Api.UrlImgUp.Secure(true)
+                  .Transform(new Transformation().Width(1960).Crop("scale"))
+                      .BuildUrl(image.FileName));
+            paths.Add(FileType.Thumbnail, cloudinary.Api.UrlImgUp.Secure(true)
+                  .Transform(new Transformation().Width(420).Crop("scale"))
+                      .BuildUrl(image.FileName));
+
+            return paths;
         }
     }
 }

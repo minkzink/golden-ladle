@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{8CB78012-2C9D-424A-A2B4-D68D17442026}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GoldenLadle.Web/Data/Migrations/20180322174539_AddFileExtToFilePath.Designer.cs">
+    <Files>
+      <File FileName="GoldenLadle.Web/Controllers/EventsController.cs" Line="226" Column="14" />
+      <File FileName="GoldenLadle.Web/Startup.cs" Line="74" Column="1" />
+      <File FileName="GoldenLadle.Web/Data/Migrations/20180322145759_AddThumbToFilePath.cs" Line="34" Column="1" />
+      <File FileName="GoldenLadle.Web/Data/Migrations/20180322174539_AddFileExtToFilePath.Designer.cs" Line="380" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
+      <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/EventsController.cs" relfile="GoldenLadle.Web/Controllers/EventsController.cs" line="310" column="1" />
+      <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/EventsController.cs" relfile="GoldenLadle.Web/Controllers/EventsController.cs" line="248" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.GoldenLadle.Web PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

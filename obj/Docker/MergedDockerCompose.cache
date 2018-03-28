@@ -1,11 +1,11 @@
 services:
   goldenladle.web:
     build:
-      context: C:\Users\brinehart\Documents\Projects\GoldenLadle
+      context: /Users/avisoftware/repo/golden-ladle
       dockerfile: GoldenLadle.Web/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-    image: goldenladleweb
+    image: goldenladle
     ports:
-    - 80/tcp
-version: '3.0'
+    - target: 80
+version: '3.4'
