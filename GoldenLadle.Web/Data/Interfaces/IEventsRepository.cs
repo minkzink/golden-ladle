@@ -8,7 +8,7 @@ namespace GoldenLadle.Data.Interfaces
     {
         Task<Event> GetAsync(int? id);
         Task<IEnumerable<Event>> GetAllAsync();
-        Event SetDates(Event entry, SaveType saveType);
+        Event SetDates(Event @event, SaveType saveType);
         Task AddAsync(Event @event);
         void Update(Event @event);
         void Remove(Event @event);

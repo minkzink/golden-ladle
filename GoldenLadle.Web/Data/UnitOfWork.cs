@@ -10,9 +10,9 @@ namespace GoldenLadle.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        public IEventsRepository Events { get; private set; }
-        public IEntriesRepository Entries { get; private set; }
-        public IVotesRepository Votes { get; private set; }
+        public virtual IEventsRepository Events { get; private set; }
+        public virtual IEntriesRepository Entries { get; private set; }
+        public virtual IVotesRepository Votes { get; private set; }
         
         public UnitOfWork(ApplicationDbContext context)
         {

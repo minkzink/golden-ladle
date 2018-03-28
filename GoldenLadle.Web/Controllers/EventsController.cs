@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GoldenLadle.Data;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
 using CloudinaryDotNet;
@@ -35,7 +33,7 @@ namespace GoldenLadle.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.Events.GetAllAsync());
+			return View(await _unitOfWork.Events.GetAllAsync());    
         }
 
         // GET: Events/Details/5
@@ -47,7 +45,14 @@ namespace GoldenLadle.Controllers
             }
 
             var @event = await _unitOfWork.Events.GetAsync(id);
-            ViewBag.LoggedInUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            try
+            {
+                ViewBag.LoggedInUser = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+            catch
+            {
+                ViewBag.LoggedInUser = "No logged in User";
+            }
 
             if (@event == null)
             {
@@ -150,11 +155,14 @@ namespace GoldenLadle.Controllers
 
         private void DeleteTempFile(string path)
         {
-            FileInfo file = new FileInfo(path);
-            if (file.Exists)//check file exsit or not
+            if (env.IsDevelopment() || env.IsProduction())
             {
-                file.Delete();
-            }
+                FileInfo file = new FileInfo(path);
+                if (file.Exists)//check file exsit or not
+                {
+                    file.Delete();
+                }
+            }   
         }
 
         // GET: Events/Delete/5
@@ -194,22 +202,30 @@ namespace GoldenLadle.Controllers
 
         private async Task<FilePath> UploadImage(Event @event, IFormFile upload)
         {
-            var image = new FilePath()
+            if (env.IsDevelopment() || env.IsProduction())
             {
-                FileName = Guid.NewGuid().ToString() + Path.GetFileNameWithoutExtension(upload.FileName),
-                FileType = FileType.Header,
-                FileExt = Path.GetExtension(upload.FileName)
-            };
-            @event.FilePaths = new List<FilePath>();
-            _path = env.WebRootFileProvider.GetFileInfo(image.FileName).PhysicalPath;
-            using (var stream = new FileStream(_path, FileMode.Create))
-            {
-                await upload.CopyToAsync(stream);
+                var image = new FilePath()
+                {
+                    FileName = Guid.NewGuid().ToString() + Path.GetFileNameWithoutExtension(upload.FileName),
+                    FileType = FileType.Header,
+                    FileExt = Path.GetExtension(upload.FileName)
+                };
+                @event.FilePaths = new List<FilePath>();
+
+                _path = env.WebRootFileProvider.GetFileInfo(image.FileName).PhysicalPath;
+                using (var stream = new FileStream(_path, FileMode.Create))
+                {
+                    await upload.CopyToAsync(stream);
+                }
+                Dictionary<FileType, string> imageUrls = UploadImageToCloudinary(image);
+                image.FileName = imageUrls.FirstOrDefault(i => i.Key == FileType.Header).Value;
+                image.ThumbName = imageUrls.FirstOrDefault(i => i.Key == FileType.Thumbnail).Value;
+                return image;
             }
-            Dictionary<FileType, string> imageUrls = UploadImageToCloudinary(image);
-            image.FileName = imageUrls.FirstOrDefault(i => i.Key == FileType.Header).Value;
-            image.ThumbName = imageUrls.FirstOrDefault(i => i.Key == FileType.Thumbnail).Value;
-            return image;
+            else
+            {
+                return new FilePath();
+            }
         }
 
         private Dictionary<FileType, string> UploadImageToCloudinary(FilePath image)
