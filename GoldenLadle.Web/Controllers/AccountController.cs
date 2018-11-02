@@ -232,6 +232,9 @@ namespace GoldenLadle.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+                    await _userManager.AddToRoleAsync(user, "NormalUser");
+                    _logger.LogInformation("User added to NormalUser role.");
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

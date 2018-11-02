@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{8CB78012-2C9D-424A-A2B4-D68D17442026}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="GoldenLadle.Web/Controllers/VotesController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GoldenLadle.Web/Controllers/AccountController.cs">
     <Files>
-      <File FileName="GoldenLadle.Web/Controllers/VotesController.cs" Line="94" Column="1" />
-      <File FileName="GoldenLadle.Web/Program.cs" Line="21" Column="10" />
+      <File FileName="GoldenLadle.Web/Controllers/VotesController.cs" Line="57" Column="1" />
+      <File FileName="GoldenLadle.Web/Program.cs" Line="1" Column="1" />
       <File FileName="GoldenLadle.Web/Data/Interfaces/IUnitOfWork.cs" Line="8" Column="33" />
       <File FileName="GoldenLadle.Web/Data/Repos/VotesRepository.cs" Line="48" Column="31" />
       <File FileName="GoldenLadle.Web/Data/Repos/EventsRepository.cs" Line="59" Column="46" />
       <File FileName="GoldenLadle.Web/Models/Vote.cs" Line="17" Column="1" />
+      <File FileName="GoldenLadle.Web/Views/Events/Details.cshtml" Line="77" Column="42" />
+      <File FileName="GoldenLadle.Web/Controllers/AccountController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -15,8 +17,6 @@
       <Catchpoint exceptionName="System.Exception" includeSubclasses="True" />
       <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/EventsController.cs" relfile="GoldenLadle.Web/Controllers/EventsController.cs" line="306" column="1" />
       <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/EventsController.cs" relfile="GoldenLadle.Web/Controllers/EventsController.cs" line="244" column="1" />
-      <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/VotesController.cs" relfile="GoldenLadle.Web/Controllers/VotesController.cs" line="56" column="1" />
-      <Breakpoint file="/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/Controllers/VotesController.cs" relfile="GoldenLadle.Web/Controllers/VotesController.cs" line="94" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
