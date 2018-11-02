@@ -52,7 +52,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">@entry.Name</h5>
                                 <p class="card-text">@entry.Description</p>
-                                @if (User.IsInRole("Admin") || User.IsInRole("NormalUser"))
+                                @if (User != null)
                                 {
                                     @for (int i = 1; i < 4; i++)
                                     {
