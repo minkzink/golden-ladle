@@ -23,7 +23,7 @@ namespace GoldenLadle.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var events = await _unitOfWork.Events.GetAllAsync();
+            var events = await _unitOfWork.Events.GetAllCurrent();
             return View(events);
         }
 
