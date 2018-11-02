@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GoldenLadle.Data;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoldenLadle.Controllers
 {
@@ -24,6 +24,13 @@ namespace GoldenLadle.Controllers
         public async Task<IActionResult> Index()
         {
             var events = await _unitOfWork.Events.GetAllAsync();
+            return View(events);
+        }
+
+        [HttpGet("/PastEvents")]
+        public async Task<IActionResult> PastEvents()
+        {
+            var events = await _unitOfWork.Events.GetAllPast();
             return View(events);
         }
 

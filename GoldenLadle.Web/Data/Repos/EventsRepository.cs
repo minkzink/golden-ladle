@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
 using Microsoft.EntityFrameworkCore;
-using GoldenLadle.Data.Interfaces;
-using System.Threading.Tasks;
 
 namespace GoldenLadle.Data.Repos
 {
@@ -22,25 +22,45 @@ namespace GoldenLadle.Data.Repos
             return await Context.Set<Event>()
                 .Include(m => m.FilePaths)
                 .Include(m => m.Entries)
-                    .ThenInclude(e => e.Votes)
+                .ThenInclude(e => e.Votes)
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
-               
+
         public override IEnumerable<Event> GetAll()
         {
             return Context.Set<Event>()
-                .Include(m => m.FilePaths)
-                .ToList();
+                          .Include(m => m.FilePaths)
+                          .Include(m => m.Entries)
+                          .OrderByDescending(f => f.StartDT)
+                          .ToList();
         }
-        
+
         public async Task<IEnumerable<Event>> GetAllAsync()
         {
             List<Event> @events = await Context.Set<Event>()
-                .Include(e => e.FilePaths)
-                .Include(e => e.Entries)
-                .OrderByDescending(f => f.StartDT)
-                .ToListAsync();
+                                               .Include(e => e.FilePaths)
+                                               .Include(e => e.Entries)
+                                               .OrderByDescending(f => f.StartDT)
+                                               .ToListAsync();
             return @events;
+        }
+
+        public async Task<IEnumerable<Event>> GetAllPast()
+        {
+            return await Context.Set<Event>()
+                                .Include(m => m.FilePaths)
+                                .Include(m => m.Entries)
+                                .Where(ev => ev.EndDT < DateTime.Now)
+                                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Event>> GetAllCurrent()
+        {
+            return await Context.Set<Event>()
+                                .Include(m => m.FilePaths)
+                                .Include(m => m.Entries)
+                                .Where(ev => ev.EndDT >= DateTime.Now)
+                                .ToListAsync();
         }
 
         public async Task AddAsync(Event @event)
