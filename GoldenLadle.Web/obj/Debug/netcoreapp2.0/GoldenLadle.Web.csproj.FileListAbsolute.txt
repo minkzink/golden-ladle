@@ -20,13 +20,5 @@ C:/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web/obj/Debug/netc
 C:/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.dll
 C:/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.pdb
 C:/Users/brinehart/Documents/Projects/GoldenLadle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/bin/Debug/netcoreapp2.0/GoldenLadle.deps.json
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/bin/Debug/netcoreapp2.0/GoldenLadle.runtimeconfig.json
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/bin/Debug/netcoreapp2.0/GoldenLadle.runtimeconfig.dev.json
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/bin/Debug/netcoreapp2.0/GoldenLadle.dll
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/bin/Debug/netcoreapp2.0/GoldenLadle.pdb
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.Web.csprojResolveAssemblyReference.cache
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.Web.csproj.CoreCompileInputs.cache
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.dll
-/Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/GoldenLadle.pdb
 /Users/avisoftware/repo/golden-ladle/GoldenLadle.Web/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs

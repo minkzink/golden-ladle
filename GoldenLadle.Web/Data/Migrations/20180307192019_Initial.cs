@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace GoldenLadle.Migrations
 {
@@ -11,259 +13,259 @@ namespace GoldenLadle.Migrations
         {
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
+                        ConcurrencyStamp = table.Column<string>(nullable: true),
+                        Name = table.Column<string>(maxLength: 256, nullable: true),
+                        NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                        AccessFailedCount = table.Column<int>(nullable: false),
+                        ConcurrencyStamp = table.Column<string>(nullable: true),
+                        Email = table.Column<string>(maxLength: 256, nullable: true),
+                        EmailConfirmed = table.Column<bool>(nullable: false),
+                        FirstName = table.Column<string>(nullable: true),
+                        LastName = table.Column<string>(nullable: true),
+                        LockoutEnabled = table.Column<bool>(nullable: false),
+                        LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                        NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                        NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                        PasswordHash = table.Column<string>(nullable: true),
+                        PhoneNumber = table.Column<string>(nullable: true),
+                        PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                        SecurityStamp = table.Column<string>(nullable: true),
+                        TwoFactorEnabled = table.Column<bool>(nullable: false),
+                        UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Events",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    Winner = table.Column<string>(nullable: true),
-                    StartDT = table.Column<DateTime>(nullable: false),
-                    EndDT = table.Column<DateTime>(nullable: false),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    DeletedDate = table.Column<DateTime>(nullable: false)
+                        Name = table.Column<string>(nullable: false),
+                        Description = table.Column<string>(nullable: false),
+                        Winner = table.Column<string>(nullable: true),
+                        StartDT = table.Column<DateTime>(nullable: false),
+                        EndDT = table.Column<DateTime>(nullable: false),
+                        CreateDate = table.Column<DateTime>(nullable: false),
+                        ModifiedDate = table.Column<DateTime>(nullable: false),
+                        DeletedDate = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<string>(nullable: false)
+                        ClaimType = table.Column<string>(nullable: true),
+                        ClaimValue = table.Column<string>(nullable: true),
+                        RoleId = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
+                        column : x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                        ClaimType = table.Column<string>(nullable: true),
+                        ClaimValue = table.Column<string>(nullable: true),
+                        UserId = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        column : x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
-                columns: table => new
+                columns : table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                        ProviderKey = table.Column<string>(nullable: false),
+                        ProviderDisplayName = table.Column<string>(nullable: true),
+                        UserId = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        column : x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
-                columns: table => new
+                columns : table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                        RoleId = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
+                        column : x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        column : x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
-                columns: table => new
+                columns : table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                        LoginProvider = table.Column<string>(nullable: false),
+                        Name = table.Column<string>(nullable: false),
+                        Value = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        column : x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Entries",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Value = table.Column<int>(nullable: false),
-                    EventId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    DeletedDate = table.Column<DateTime>(nullable: false)
+                        Name = table.Column<string>(nullable: true),
+                        Description = table.Column<string>(nullable: true),
+                        Value = table.Column<int>(nullable: false),
+                        EventId = table.Column<int>(nullable: false),
+                        UserId = table.Column<string>(nullable: true),
+                        CreateDate = table.Column<DateTime>(nullable: false),
+                        ModifiedDate = table.Column<DateTime>(nullable: false),
+                        DeletedDate = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_Entries", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Entries_Events_EventId",
-                        column: x => x.EventId,
+                        column : x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Entries_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        column : x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete : ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "FilePaths",
-                columns: table => new
+                columns : table => new
                 {
                     FilePathId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    EventId = table.Column<int>(nullable: false),
-                    FileName = table.Column<string>(maxLength: 255, nullable: true),
-                    FileType = table.Column<int>(nullable: false)
+                        EventId = table.Column<int>(nullable: false),
+                        FileName = table.Column<string>(maxLength: 255, nullable: true),
+                        FileType = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_FilePaths", x => x.FilePathId);
                     table.ForeignKey(
                         name: "FK_FilePaths_Events_EventId",
-                        column: x => x.EventId,
+                        column : x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Vote",
-                columns: table => new
+                columns : table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Value = table.Column<byte>(nullable: false),
-                    EntryId = table.Column<int>(nullable: false),
-                    EventId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    ModifiedDate = table.Column<DateTime>(nullable: false),
-                    DeletedDate = table.Column<DateTime>(nullable: false)
+                        Value = table.Column<byte>(nullable: false),
+                        EntryId = table.Column<int>(nullable: false),
+                        EventId = table.Column<int>(nullable: false),
+                        UserId = table.Column<string>(nullable: true),
+                        CreateDate = table.Column<DateTime>(nullable: false),
+                        ModifiedDate = table.Column<DateTime>(nullable: false),
+                        DeletedDate = table.Column<DateTime>(nullable: false)
                 },
-                constraints: table =>
+                constraints : table =>
                 {
                     table.PrimaryKey("PK_Vote", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Vote_Entries_EntryId",
-                        column: x => x.EntryId,
+                        column : x => x.EntryId,
                         principalTable: "Entries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Vote_Events_EventId",
-                        column: x => x.EventId,
+                        column : x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete : ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Vote_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        column : x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete : ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -275,7 +277,7 @@ namespace GoldenLadle.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique : true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -301,7 +303,7 @@ namespace GoldenLadle.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique : true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Entries_EventId",

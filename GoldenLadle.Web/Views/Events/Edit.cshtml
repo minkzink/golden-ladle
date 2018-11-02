@@ -13,7 +13,7 @@
         <hr />
         <div class="row">
             <div class="col-sm-12 col-md-12">
-                <form asp-action="Edit">
+                <form asp-action="Edit" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
@@ -29,12 +29,12 @@
                     <div class="form-row">
                         <div class="col-sm-6">
                             <label asp-for="StartDT" class="control-label"></label>
-                            <input asp-for="StartDT" id="startDT" class="form-control" />
+                            <input asp-for="StartDT" class="form-control" />
                             <span asp-validation-for="StartDT" class="text-danger"></span>
                         </div>
                         <div class="col-sm-6">
                             <label asp-for="EndDT" class="control-label"></label>
-                            <input asp-for="EndDT" id="endDT" class="form-control" />
+                            <input asp-for="EndDT" class="form-control" />
                             <span asp-validation-for="EndDT" class="text-danger"></span>
                         </div>
                     </div>
@@ -42,7 +42,6 @@
                         <p>Upload an image background for the event:</p>
                         <input type="file" id="Header" name="upload" />
                     </div>
-
                     <div class="form-group form-inline">
                         <input type="submit" value="Save" class="btn btn-outline-primary" />&nbsp;&nbsp;
                         <a href="/Events/" class="btn btn-outline-secondary">Back to List</a>
@@ -61,7 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        $("#startDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
-        $("#endDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
+        $("#StartDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
+        $("#EndDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
     </script>
 }

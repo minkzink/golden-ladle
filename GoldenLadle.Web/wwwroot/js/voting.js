@@ -70,9 +70,7 @@
             success: function () {
                 getVoteId(userId, entryId, parentClass, selectClass);
                 addTooltip(voteId, parentClass, selectId, selectClass, entryValue);
-                console.log('Votes Post Successful!');
                 $('body').toggleClass('loaded').removeAttr("noscroll");
-                toggleTooltip();
             },
             error: function () {
                 console.log('Error during AJAX.');
@@ -88,7 +86,6 @@
             dataType: 'json',
             success: function () {
                 deleteToolTip(parentClass, selectId, selectClass);
-                console.log('Vote Deleted Successful!');
                 $('body').toggleClass('loaded').removeAttr("noscroll");
             },
             error: function () {
@@ -104,6 +101,7 @@
         $(`#${selectId}`).parent().removeAttr('title data-tippy data-original-title');
         $(`.${parentClass}`).removeAttr('title data-tippy data-original-title');
         $(`.${selectClass}`).removeClass("disabled");
+        tipobj = tippy(`.${parentClass}`);
         tipobj.destroyAll();
     }
 

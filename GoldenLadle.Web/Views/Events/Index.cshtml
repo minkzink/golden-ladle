@@ -51,7 +51,7 @@ else
                 {
                     if (e.EndDT <= DateTime.Now)
                     {
-                        <p><strong>Winner: </strong><em>@Html.DisplayFor(modelItem => e.Entries.OrderByDescending(en => en.Value).Take(1))</em></p>
+                        <p><strong>Winner: </strong><em>@e.Entries.OrderByDescending(en => en.Value).FirstOrDefault().Name</em></p>
                     }
                     else
                     {

@@ -9,17 +9,17 @@
 <div id="event" style="background: url('@Model.FilePaths.First(f => f.FileType == FileType.Header).FileName') center center no-repeat;">
     <div class="container event-header">
         <div class="col-sm-12">
-            <h1 class="text-center text-white shadow">@Html.DisplayFor(model => model.Name)</h1>
+            <h1 class="text-center text-white shadow">@Model.Name</h1>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-3"></div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="text-center text-white shadow">Start Date:</h4>
-                <p class="text-center text-white shadow">@Html.DisplayFor(model => model.EndDT)</p>
+                <p class="text-center text-white shadow">@Model.StartDT</p>
             </div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="text-center text-white shadow">End Date:</h4>
-                <p class="text-center text-white shadow">@Html.DisplayFor(model => model.EndDT)</p>
+                <p class="text-center text-white shadow">@Model.EndDT</p>
             </div>
             <div class="col-sm-12 col-md-3"></div>
         </div>
@@ -30,7 +30,7 @@
                 <div class="col-sm-12 col">
                     @foreach (Entry entry in Model.Entries.OrderByDescending(en => en.Value).Take(3))
                     {
-                        <h4 class="text-center text-light shadow"><em>1st Place:</em> @entry.Name]</h4>
+                        <h4 class="text-center text-light shadow"><em>1st Place:</em> @entry.Name</h4>
                     }
                 </div>
             </div>

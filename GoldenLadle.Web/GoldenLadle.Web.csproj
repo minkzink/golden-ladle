@@ -9,44 +9,18 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>fa30cacd-05d3-452e-a3aa-a71b18b1e9cf</UserSecretsId>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>GoldenLadle</AssemblyName>
     <RootNamespace>GoldenLadle</RootNamespace>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <Compile Remove="Data\Migrations\20180221194337_AddEvents.cs" />
-    <Compile Remove="Data\Migrations\20180221194337_AddEvents.Designer.cs" />
-    <Compile Remove="Data\Migrations\20180305153316_AddBaseEntityFields.cs" />
-    <Compile Remove="Data\Migrations\20180305153316_AddBaseEntityFields.Designer.cs" />
-    <Compile Remove="Data\Migrations\20180305164652_AddBaseEntityFields.cs" />
-    <Compile Remove="Data\Migrations\20180305164652_AddBaseEntityFields.Designer.cs" />
-    <Compile Remove="Data\Helpers\AmazonUploader.cs" />
-    <Compile Remove="Data\UserRoleInitializer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\images\sad.png" />
-    <Content Remove="appsettings.Production.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
-    <PackageReference Include="CloudinaryDotNet" Version="1.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.3.1" />
   </ItemGroup>
     
 </Project>

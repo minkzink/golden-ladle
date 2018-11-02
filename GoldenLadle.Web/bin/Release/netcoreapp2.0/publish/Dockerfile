@@ -1,15 +1,16 @@
-FROM microsoft/aspnetcore-build:2.0 AS base
+FROM microsoft/dotnet:2.1.403-sdk AS base
 WORKDIR /app
-EXPOSE 80
+EXPOSE 5000
+EXPOSE 5001
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/dotnet:2.1.403-sdk AS build
 WORKDIR /src
 COPY GoldenLadle.sln ./
 COPY GoldenLadle.Web/GoldenLadle.Web.csproj GoldenLadle.Web/
 COPY GoldenLadle.Web/NuGet.config GoldenLadle.Web/
-RUN dotnet restore -nowarn:msb3202,nu1503
 COPY . .
 WORKDIR /src/GoldenLadle.Web
+RUN dotnet restore -nowarn:msb3202,nu1503
 RUN dotnet build -c Release -o /app
 
 FROM build AS publish

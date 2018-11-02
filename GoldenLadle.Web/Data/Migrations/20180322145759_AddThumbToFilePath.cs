@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace GoldenLadle.Migrations
 {
@@ -15,7 +16,7 @@ namespace GoldenLadle.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "ThumbName",
                 table: "FilePaths",
-                nullable: true);
+                nullable : true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -27,7 +28,7 @@ namespace GoldenLadle.Migrations
             migrationBuilder.AddColumn<string[]>(
                 name: "Winners",
                 table: "Events",
-                nullable: true);
+                nullable : true);
         }
     }
 }

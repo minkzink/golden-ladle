@@ -103,11 +103,7 @@ namespace GoldenLadle.Controllers
             }
 
             var @event = await _unitOfWork.Events.GetAsync(id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
-            return View(@event);
+            return @event == null ? NotFound() : (IActionResult)View(@event);
         }
 
         // POST: Events/Edit/5
