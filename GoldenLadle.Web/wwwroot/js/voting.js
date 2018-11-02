@@ -71,6 +71,7 @@
                 getVoteId(userId, entryId, parentClass, selectClass);
                 addTooltip(voteId, parentClass, selectId, selectClass, entryValue);
                 $('body').toggleClass('loaded').removeAttr("noscroll");
+                window.location.reload(false);
             },
             error: function () {
                 console.log('Error during AJAX.');
@@ -87,6 +88,7 @@
             success: function () {
                 deleteToolTip(parentClass, selectId, selectClass);
                 $('body').toggleClass('loaded').removeAttr("noscroll");
+                window.location.reload(false);
             },
             error: function () {
                 console.log('AJAX error in request.');

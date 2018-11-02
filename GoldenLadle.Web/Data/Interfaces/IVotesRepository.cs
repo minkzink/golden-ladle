@@ -11,7 +11,7 @@ namespace GoldenLadle.Data.Interfaces
         Vote SetDates(Vote vote, SaveType saveType);
         void Add(Vote vote);
         void Remove(Vote vote);
-        Entry UpdateEntryVoteCount(Entry entry);
+        Task<int> GetEntryVoteCount(int entryId);
         bool CheckIfAnyExist(int? voteId = null, string userId = "", int? entryId = null, int? eventId = null);
         Task<Vote> GetAsync(string userId, int? entryId);
     }

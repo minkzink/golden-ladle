@@ -40,14 +40,8 @@ namespace GoldenLadle.Controllers
                 return BadRequest(ModelState);
             }
             Vote vote = new Vote();
-            if (id.HasValue) vote = await _unitOfWork.Votes.GetAsync((int)id);
-            else vote = await _unitOfWork.Votes.GetAsync(userId, entryId);
-            if (vote == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(vote);
+            vote = id.HasValue ? await _unitOfWork.Votes.GetAsync((int)id) : await _unitOfWork.Votes.GetAsync(userId, entryId);
+            return vote == null ? NotFound() : (IActionResult)Ok(vote);
         }
 
         // POST: api/Votes
@@ -61,8 +55,8 @@ namespace GoldenLadle.Controllers
             }
 
             _unitOfWork.Votes.Add(vote);
-            await _unitOfWork.CompleteAsync();
-            UpdateValueCount(vote.EntryId);
+            _unitOfWork.Complete();
+            await UpdateValueCount(vote.EntryId);
 
             return CreatedAtAction("GetVote", new { id = vote.Id }, vote);
         }
@@ -86,7 +80,7 @@ namespace GoldenLadle.Controllers
             Entry originalEntry = _unitOfWork.Entries.Get(vote.EntryId);
             _unitOfWork.Votes.Remove(vote);
             await _unitOfWork.CompleteAsync();
-            UpdateValueCount(originalEntry);
+            await UpdateValueCount(originalEntry.Id);
 
             return Ok(vote);
         }
@@ -96,18 +90,12 @@ namespace GoldenLadle.Controllers
             return _unitOfWork.Votes.CheckIfAnyExist(id);
         }
 
-        private void UpdateValueCount(int id)
+        private async Task UpdateValueCount(int id)
         {
-            Entry originalEntry = _unitOfWork.Entries.Get(id);
-            Entry updatedEntry = _unitOfWork.Votes.UpdateEntryVoteCount(originalEntry);
-            _unitOfWork.Entries.Update(updatedEntry);
-            _unitOfWork.CompleteAsync();
-        }
-        private void UpdateValueCount(Entry originalEntry)
-        {
-            Entry updatedEntry = _unitOfWork.Votes.UpdateEntryVoteCount(originalEntry);
-            _unitOfWork.Entries.Update(updatedEntry);
-            _unitOfWork.CompleteAsync();
+            Entry entry = _unitOfWork.Entries.Get(id);
+            entry.Value = await _unitOfWork.Votes.GetEntryVoteCount(entry.Id);
+            _unitOfWork.Entries.Update(entry);
+            await _unitOfWork.CompleteAsync();
         }
     }
 }

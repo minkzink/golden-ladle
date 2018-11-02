@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GoldenLadle.Data.Interfaces
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IEventsRepository Events { get; }
         IEntriesRepository Entries { get; }

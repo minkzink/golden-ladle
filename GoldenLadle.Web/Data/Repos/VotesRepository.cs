@@ -45,13 +45,11 @@ namespace GoldenLadle.Data.Repos
             }
         }
 
-        public Entry UpdateEntryVoteCount(Entry entry)
+        public async Task<int> GetEntryVoteCount(int entryId)
         {
-            int value = Context.Set<Vote>()
-                .Where(v => v.EntryId == entry.Id)
-                .Sum(v => v.Value);
-            entry.Value = value;
-            return entry;
+            return await Context.Set<Vote>()
+                          .Where(v => v.EntryId == entryId)
+                          .SumAsync(v => v.Value);
         }
         
         public bool CheckIfAnyExist(int? voteId = null, string userId = "", int? entryId = null, int? eventId = null)
