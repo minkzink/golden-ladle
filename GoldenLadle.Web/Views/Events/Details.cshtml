@@ -54,25 +54,42 @@
                                 <p class="card-text">@entry.Description</p>
                                 @if (User != null)
                                 {
-                                    @for (int i = 1; i < 4; i++)
+                                    @for(int i = 1; i < 4; i++)
                                     {
-                                        @if (entry.Votes.Any(v => v.Value == i && v.UserId == ViewBag.LoggedInUser))
+                                        @if (entry.Votes.Any(v => v.Value == 3 && v.UserId == ViewBag.LoggedInUser) && i == 1)
                                         {
-                                            <p class="vote@(i)-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="<strong>Voted #@(i)</strong> Click to undo." tabindex="0">
-                                                <button class="btn btn-block btn-success  vote@(i) disabled" id="vote@(i)_@entry.Id" value="@(i)" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == i && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #@(i)</button>
+                                            <p class="vote1-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="<strong>Voted #1</strong> Click to undo." tabindex="0">
+                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="3" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 3 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
                                             </p>
                                         }
-                                        else if (Model.Entries.Any(e => e.Votes.Any(v => v.UserId == ViewBag.LoggedInUser && v.Value == i)))
+                                        else if (!entry.Votes.Any(v => v.Value == 3 && v.UserId == ViewBag.LoggedInUser) && i == 1)
                                         {
-
-                                            <p class="vote@(i)-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="You Can't Vote for #@(i) more than once." tabindex="0">
-                                                <button class="btn btn-block btn-outline-success  vote@(i) disabled" id="vote@(i)_@entry.Id" value="@(i)"><i class="fas fa-thumbs-up text-left"></i> Vote #@(i)</button>
+                                            <p class="vote1-tooltip" tabindex="0">
+                                                <button class="btn btn-block btn-outline-success vote1" id="vote1_@entry.Id" value="3"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
                                             </p>
                                         }
-                                        else
+                                        else if (entry.Votes.Any(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser) && i == 2)
                                         {
-                                            <p class="vote@(i)-tooltip" tabindex="0">
-                                                <button class="btn btn-block btn-outline-success vote@(i)" id="vote@(i)_@entry.Id" value="@(i)"><i class="fas fa-thumbs-up text-left"></i> Vote #@(i)</button>
+                                            <p class="vote1-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="<strong>Voted #1</strong> Click to undo." tabindex="0">
+                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="2" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
+                                            </p>
+                                        }
+                                        else if (!entry.Votes.Any(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser) && i == 2)
+                                        {
+                                            <p class="vote2-tooltip" tabindex="0">
+                                                <button class="btn btn-block btn-outline-success vote2" id="vote2_@entry.Id" value="2"><i class="fas fa-thumbs-up text-left"></i> Vote #2</button>
+                                            </p>
+                                        }
+                                        else if (entry.Votes.Any(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser) && i == 3)
+                                        {
+                                            <p class="vote1-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="<strong>Voted #1</strong> Click to undo." tabindex="0">
+                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="1" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
+                                            </p>
+                                        }
+                                        else if (!entry.Votes.Any(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser) && i == 3)
+                                        {
+                                            <p class="vote3-tooltip" tabindex="0">
+                                                <button class="btn btn-block btn-outline-success vote3" id="vote3_@entry.Id" value="1"><i class="fas fa-thumbs-up text-left"></i> Vote #3</button>
                                             </p>
                                         }
                                     }

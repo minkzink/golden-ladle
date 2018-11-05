@@ -55,8 +55,7 @@ namespace GoldenLadle.Data.Repos
         }
 
         public async Task<IEnumerable<Event>> GetAllCurrent()
-        {
-            return await Context.Set<Event>()
+        {            return await Context.Set<Event>()
                                 .Include(m => m.FilePaths)
                                 .Include(m => m.Entries)
                                 .Where(ev => ev.EndDT >= DateTime.Now)

@@ -23,7 +23,6 @@
         userId = $("#loggedInUser").attr("value");
         voteId = null;
         voteId = $(this).attr("data-voteid");
-
         $('body').toggleClass('loaded').attr("noscroll");
         if ($(this).hasClass("disabled") && voteId !== undefined) {
             deleteToolTip(parentClass, selectId, selectClass);
