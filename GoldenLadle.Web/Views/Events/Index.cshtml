@@ -51,7 +51,11 @@ else
                 {
                     if (e.EndDT <= DateTime.Now)
                     {
-                        <p><strong>Winner: </strong><em>@e.Entries.OrderByDescending(en => en.Value).FirstOrDefault().Name</em></p>
+                        <h3><strong>Winners:</strong></h3>
+                        foreach(Entry entry in e.Entries.OrderByDescending(en => en.Value).Take(3))
+                        {
+                            <h4 class="text-dark"> @entry.Name</h4>
+                        }
                     }
                     else
                     {

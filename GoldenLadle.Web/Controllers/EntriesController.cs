@@ -106,9 +106,13 @@ namespace GoldenLadle.Controllers
 
             if (ModelState.IsValid)
             {
+                var entryToUpdate = _unitOfWork.Entries.Get(entry.Id);
+                entryToUpdate.Name = entry.Name;
+                entryToUpdate.Description = entry.Description;
+                entryToUpdate.ModifiedDate = DateTime.Now;
                 try
                 {
-                    _unitOfWork.Entries.Update(entry);
+                    _unitOfWork.Entries.Update(entryToUpdate);
                     await _unitOfWork.CompleteAsync();
                 }
                 catch (DbUpdateConcurrencyException)

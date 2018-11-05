@@ -60,7 +60,19 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        $("#StartDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
-        $("#EndDT").flatpickr({ enableTime: true, dateFormat: "m/d/Y H:i", });
+        $("#StartDT").flatpickr({ 
+            enableTime: true,
+            dateFormat: "m/d/Y H:i",
+            defaultDate: @Model.StartDT.ToLocalTime().ToShortDateString(),
+            defaultHour: @Model.StartDT.ToLocalTime().Hour.ToString(),
+            defaultMinute: @Model.StartDT.ToLocalTime().Minute.ToString() 
+        });
+        $("#EndDT").flatpickr({ 
+            enableTime: true,
+            dateFormat: "m/d/Y H:i",
+            defaultDate: @Model.EndDT.ToLocalTime().ToShortDateString(), 
+            defaultHour: @Model.EndDT.ToLocalTime().Hour.ToString(),
+            defaultMinute: @Model.EndDT.ToLocalTime().Minute.ToString()
+        });
     </script>
 }

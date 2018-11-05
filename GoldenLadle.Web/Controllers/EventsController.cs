@@ -33,7 +33,7 @@ namespace GoldenLadle.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-			return View(await _unitOfWork.Events.GetAllAsync());    
+			return View(await _unitOfWork.Events.GetAllCurrent());    
         }
 
         // GET: Events/Details/5
@@ -86,6 +86,8 @@ namespace GoldenLadle.Controllers
                     DeleteTempFile(_path);
                     @event.FilePaths.Add(image);
                 }
+                @event.StartDT = @event.StartDT.ToLocalTime();
+                @event.EndDT = @event.EndDT.ToLocalTime();
                 await _unitOfWork.Events.AddAsync(@event);
                 _unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
@@ -121,6 +123,7 @@ namespace GoldenLadle.Controllers
 
             if (ModelState.IsValid)
             {
+                var eventToUpdate = _unitOfWork.Events.Get(@event.Id);
                 if (upload != null && upload.Length > 0)
                 {
                     FilePath image = await UploadImage(@event, upload);
@@ -128,9 +131,14 @@ namespace GoldenLadle.Controllers
                     DeleteTempFile(_path);
                     @event.FilePaths.Add(image);
                 }
+                eventToUpdate.StartDT = @event.StartDT.ToLocalTime();
+                eventToUpdate.EndDT = @event.EndDT.ToLocalTime();
+                eventToUpdate.Name = @event.Name;
+                eventToUpdate.Description = @event.Description;
+                eventToUpdate.ModifiedDate = DateTime.Now;
                 try
                 {
-                    _unitOfWork.Events.Update(@event);
+                    _unitOfWork.Events.Update(eventToUpdate);
                     await _unitOfWork.CompleteAsync();
                 }
                 catch (DbUpdateConcurrencyException)

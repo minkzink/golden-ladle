@@ -58,7 +58,8 @@ namespace GoldenLadle.Data.Repos
         {            return await Context.Set<Event>()
                                 .Include(m => m.FilePaths)
                                 .Include(m => m.Entries)
-                                .Where(ev => ev.EndDT >= DateTime.Now)
+                                .Where(ev => ev.EndDT <= DateTime.Now.AddDays(14))
+                                .OrderByDescending(ev => ev.StartDT)
                                 .ToListAsync();
         }
 

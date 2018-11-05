@@ -32,7 +32,7 @@
                                     else if (DateTime.Now > ev.EndDT)
                                     {
                                         <br /><p>&nbsp;</p>
-                                        <h3 class="text-dark">Voting has Closed. And the Winner is:</h3>
+                                        <h3 class="text-dark">Voting has Closed. And the Winners are:</h3>
                                         if (ev.Entries != null && ev.Entries.OrderByDescending(en => en.Value).Count() >= 3)
                                         {
                                             foreach(Entry entry in ev.Entries.OrderByDescending(en => en.Value).Take(3))

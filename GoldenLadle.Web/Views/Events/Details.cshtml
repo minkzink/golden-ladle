@@ -15,11 +15,11 @@
             <div class="col-sm-12 col-md-3"></div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="text-center text-white shadow">Start Date:</h4>
-                <p class="text-center text-white shadow">@Model.StartDT</p>
+                <p class="text-center text-white shadow">@Model.StartDT.ToLocalTime()</p>
             </div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="text-center text-white shadow">End Date:</h4>
-                <p class="text-center text-white shadow">@Model.EndDT</p>
+                <p class="text-center text-white shadow">@Model.EndDT.ToLocalTime()</p>
             </div>
             <div class="col-sm-12 col-md-3"></div>
         </div>
@@ -28,9 +28,10 @@
         {
             <div class="row">
                 <div class="col-sm-12 col">
+                    <h4 class="text-center text-light">Winners:</h4>
                     @foreach (Entry entry in Model.Entries.OrderByDescending(en => en.Value).Take(3))
                     {
-                        <h4 class="text-center text-light shadow"><em>1st Place:</em> @entry.Name</h4>
+                        <h4 class="text-center text-light shadow">@entry.Name</h4>
                     }
                 </div>
             </div>
@@ -143,7 +144,7 @@
         }
         else
         {
-            if(this.User.IsInRole("Admin") || this.User.IsInRole("NormalUser"))
+            if(User.IsInRole("Admin") || User.IsInRole("NormalUser"))
             {
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-3">
@@ -168,7 +169,7 @@
         }
 
 
-        @if (this.User.IsInRole("Admin"))
+        @if (User.IsInRole("Admin"))
         {
             <div class="d-flex justify-content-end">
                 <div class="p-2">
