@@ -37,7 +37,7 @@
                                         {
                                             foreach(Entry entry in ev.Entries.OrderByDescending(en => en.Value).Take(3))
                                             {
-                                                <h4 class="text-dark"> @entry.Name</h4>
+                                                <h4 class="text-dark"> @entry.Name - <em>@entry.Value Points</em></h4>
                                             }
                                         }
 
