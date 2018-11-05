@@ -71,7 +71,7 @@
                                         else if (entry.Votes.Any(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser) && i == 2)
                                         {
                                             <p class="vote1-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="<strong>Voted #1</strong> Click to undo." tabindex="0">
-                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="2" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
+                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="2" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #2</button>
                                             </p>
                                         }
                                         else if (!entry.Votes.Any(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser) && i == 2)
@@ -83,7 +83,7 @@
                                         else if (entry.Votes.Any(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser) && i == 3)
                                         {
                                             <p class="vote1-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="<strong>Voted #1</strong> Click to undo." tabindex="0">
-                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="1" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
+                                                <button class="btn btn-block btn-success  vote1 disabled" id="vote1 @entry.Id" value="1" data-voteid="@entry.Votes.FirstOrDefault(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser).Id"><i class="fas fa-thumbs-up text-left"></i> Vote #3</button>
                                             </p>
                                         }
                                         else if (!entry.Votes.Any(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser) && i == 3)
