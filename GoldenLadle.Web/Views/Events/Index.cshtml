@@ -1,5 +1,5 @@
-﻿@model IEnumerable<GoldenLadle.Models.Event>
-
+﻿@using AVI.Helpers;
+@model IEnumerable<GoldenLadle.Models.Event>
 @{
     ViewData["Title"] = "Index";
 }
@@ -49,7 +49,7 @@ else
                 <p><strong>End Date: </strong><em> @Html.DisplayFor(modelItem => e.EndDT)</em></p>
                 @if (e.Entries.Count() > 0)
                 {
-                    if (e.EndDT <= DateTime.Now)
+                    if (e.EndDT <= DateTime.UtcNow.ConvertTimeToLocal("America/New_York"))
                     {
                         <h3><strong>Winners:</strong></h3>
                         foreach(Entry entry in e.Entries.OrderByDescending(en => en.Value).Take(3))

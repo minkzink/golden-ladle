@@ -9,11 +9,14 @@
            "type": "coreclr",
            "request": "launch",
            "preLaunchTask": "build",
-           "program": "${workspaceFolder}/bin/Debug/<target-framework>/<project-name.dll>",
+           "program": "${workspaceFolder}/GoldenLadle.Web/bin/Debug/netcoreapp2.2/GoldenLadle.dll",
            "args": [],
            "cwd": "${workspaceFolder}",
            "stopAtEntry": false,
-           "console": "internalConsole"
+           "console": "internalConsole",
+           "env": {
+               "PORT": "5001"
+           }
        },
         {
             "name": ".NET Core Launch (web)",

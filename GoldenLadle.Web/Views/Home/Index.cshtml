@@ -1,4 +1,5 @@
 ﻿@using GoldenLadle.Models
+@using AVI.Helpers;
 @model List<Event>
 @{
     ViewData["Title"] = "Home Page";
@@ -31,11 +32,11 @@
                                 <div class="card-body">
                                     <h1 class="text-dark">@ev.Name</h1>
                                     <h4 class="text-muted">@ev.Description</h4>
-                                    @if (DateTime.Now < ev.StartDT)
+                                    @if (DateTime.UtcNow.ConvertTimeToLocal("America/New_York") < ev.StartDT)
                                     {
                                         <h2 class="text-dark">Voting has not opened yet.<br />Voting will open at @ev.StartDT</h2>
                                     }
-                                    else if (DateTime.Now > ev.EndDT)
+                                    else if (DateTime.UtcNow.ConvertTimeToLocal("America/New_York") > ev.EndDT)
                                     {
                                         <br /><p>&nbsp;</p>
                                         <h3 class="text-dark">Voting has Closed. And the Winners are:</h3>

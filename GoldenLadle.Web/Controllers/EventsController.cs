@@ -114,6 +114,8 @@ namespace GoldenLadle.Controllers
             }
 
             var @event = await _unitOfWork.Events.GetAsync(id);
+            @event.StartDT = @event.StartDT.ConvertTimeToLocal("America/New_York");
+            @event.EndDT = @event.EndDT.ConvertTimeToLocal("America/New_York");
             return @event == null ? NotFound() : (IActionResult)View(@event);
         }
 

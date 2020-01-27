@@ -1,4 +1,5 @@
-﻿@model GoldenLadle.Models.Event
+﻿@using AVI.Helpers;
+@model GoldenLadle.Models.Event
 
 @{
     ViewData["Title"] = "Details";
@@ -15,16 +16,16 @@
             <div class="col-sm-12 col-md-3"></div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="text-center text-white shadow">Start Date:</h4>
-                <p class="text-center text-white shadow">@Model.StartDT.ToLocalTime()</p>
+                <p class="text-center text-white shadow">@Model.StartDT</p>
             </div>
             <div class="col-sm-12 col-md-3">
                 <h4 class="text-center text-white shadow">End Date:</h4>
-                <p class="text-center text-white shadow">@Model.EndDT.ToLocalTime()</p>
+                <p class="text-center text-white shadow">@Model.EndDT</p>
             </div>
             <div class="col-sm-12 col-md-3"></div>
         </div>
 
-        @if (Model.EndDT <= DateTime.Now)
+        @if (Model.EndDT <= DateTime.UtcNow.ConvertTimeToLocal("America/New_York"))
         {
             <div class="row">
                 <div class="col-sm-12 col">

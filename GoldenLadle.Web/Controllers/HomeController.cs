@@ -22,8 +22,8 @@ namespace GoldenLadle.Controllers
             var events = (List<Event>)await _unitOfWork.Events.GetAllCurrent();
             for (int i = 0; i < events.Count; i++)
             {
-                events[i].StartDT = TimeZoneHelper.ConvertTimeToLocal(events[i].StartDT, "America/New_York");
-                events[i].EndDT = TimeZoneHelper.ConvertTimeToLocal(events[i].EndDT, "America/New_York");
+                events[i].StartDT = events[i].StartDT.ConvertTimeToLocal("America/New_York");
+                events[i].EndDT = events[i].EndDT.ConvertTimeToLocal("America/New_York");
             }
             return View(events);
         }
