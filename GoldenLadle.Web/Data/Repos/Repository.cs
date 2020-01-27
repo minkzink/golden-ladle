@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoldenLadle.Data.Repos
 {
@@ -24,7 +24,7 @@ namespace GoldenLadle.Data.Repos
             return entity;
         }
 
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual ICollection<TEntity> GetAll()
         {
             var entities = Context.Set<TEntity>().ToList();
             return entities;

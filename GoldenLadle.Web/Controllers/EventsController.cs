@@ -4,15 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AVI.Helpers;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using GoldenLadle.Data.Interfaces;
+using GoldenLadle.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GoldenLadle.Data.Interfaces;
-using GoldenLadle.Models;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Hosting;
 
 namespace GoldenLadle.Controllers
 {
@@ -33,7 +34,13 @@ namespace GoldenLadle.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-			return View(await _unitOfWork.Events.GetAllCurrent());    
+            var events = (List<Event>)await _unitOfWork.Events.GetAllCurrent();
+            for (int i = 0; i < events.Count; i++)
+            {
+                events[i].StartDT = events[i].StartDT.ConvertTimeToLocal("America/New_York");
+                events[i].EndDT = events[i].EndDT.ConvertTimeToLocal("America/New_York");
+            }
+            return View(events);
         }
 
         // GET: Events/Details/5
@@ -86,8 +93,8 @@ namespace GoldenLadle.Controllers
                     DeleteTempFile(_path);
                     @event.FilePaths.Add(image);
                 }
-                @event.StartDT = @event.StartDT.ToLocalTime();
-                @event.EndDT = @event.EndDT.ToLocalTime();
+                @event.StartDT = @event.StartDT.ConvertTimeToUTC("America/New_York");
+                @event.EndDT = @event.EndDT.ConvertTimeToUTC("America/New_York");
                 await _unitOfWork.Events.AddAsync(@event);
                 _unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
@@ -131,8 +138,8 @@ namespace GoldenLadle.Controllers
                     DeleteTempFile(_path);
                     @event.FilePaths.Add(image);
                 }
-                eventToUpdate.StartDT = @event.StartDT.ToLocalTime();
-                eventToUpdate.EndDT = @event.EndDT.ToLocalTime();
+                eventToUpdate.StartDT = @event.StartDT.ConvertTimeToUTC("America/New_York");
+                eventToUpdate.EndDT = @event.EndDT.ConvertTimeToUTC("America/New_York");
                 eventToUpdate.Name = @event.Name;
                 eventToUpdate.Description = @event.Description;
                 eventToUpdate.ModifiedDate = DateTime.Now;
@@ -162,11 +169,11 @@ namespace GoldenLadle.Controllers
             if (env.IsDevelopment() || env.IsProduction())
             {
                 FileInfo file = new FileInfo(path);
-                if (file.Exists)//check file exsit or not
+                if (file.Exists) //check file exsit or not
                 {
                     file.Delete();
                 }
-            }   
+            }
         }
 
         // GET: Events/Delete/5
@@ -183,6 +190,8 @@ namespace GoldenLadle.Controllers
             {
                 return NotFound();
             }
+            @event.StartDT = @event.StartDT.ConvertTimeToLocal("America/New_York");
+            @event.EndDT = @event.EndDT.ConvertTimeToLocal("America/New_York");
 
             return View(@event);
         }
@@ -217,7 +226,7 @@ namespace GoldenLadle.Controllers
                 @event.FilePaths = new List<FilePath>();
 
                 _path = env.WebRootFileProvider.GetFileInfo(image.FileName).PhysicalPath;
-                using (var stream = new FileStream(_path, FileMode.Create))
+                using(var stream = new FileStream(_path, FileMode.Create))
                 {
                     await upload.CopyToAsync(stream);
                 }
@@ -250,11 +259,11 @@ namespace GoldenLadle.Controllers
             };
             ImageUploadResult result = cloudinary.Upload(uploadParams);
             paths.Add(FileType.Header, cloudinary.Api.UrlImgUp.Secure(true)
-                  .Transform(new Transformation().Width(1960).Crop("scale"))
-                      .BuildUrl(image.FileName));
+                .Transform(new Transformation().Width(1960).Crop("scale"))
+                .BuildUrl(image.FileName));
             paths.Add(FileType.Thumbnail, cloudinary.Api.UrlImgUp.Secure(true)
-                  .Transform(new Transformation().Width(420).Crop("scale"))
-                      .BuildUrl(image.FileName));
+                .Transform(new Transformation().Width(420).Crop("scale"))
+                .BuildUrl(image.FileName));
 
             return paths;
         }

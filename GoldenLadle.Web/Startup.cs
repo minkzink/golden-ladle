@@ -3,6 +3,7 @@ using GoldenLadle.Data;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
 using GoldenLadle.Services;
+using GoldenLadle.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -56,6 +57,7 @@ namespace GoldenLadle
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddAuthentication()
                 .AddCookie("Cookie", opt => opt.SlidingExpiration = true);

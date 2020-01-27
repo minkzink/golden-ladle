@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using GoldenLadle.Data;
+using AVI.Helpers;
 using GoldenLadle.Data.Interfaces;
 using GoldenLadle.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoldenLadle.Controllers
 {
@@ -23,7 +19,12 @@ namespace GoldenLadle.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var events = await _unitOfWork.Events.GetAllCurrent();
+            var events = (List<Event>)await _unitOfWork.Events.GetAllCurrent();
+            for (int i = 0; i < events.Count; i++)
+            {
+                events[i].StartDT = TimeZoneHelper.ConvertTimeToLocal(events[i].StartDT, "America/New_York");
+                events[i].EndDT = TimeZoneHelper.ConvertTimeToLocal(events[i].EndDT, "America/New_York");
+            }
             return View(events);
         }
 

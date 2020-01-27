@@ -26,41 +26,42 @@ namespace GoldenLadle.Data.Repos
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
 
-        public override IEnumerable<Event> GetAll()
+        public override ICollection<Event> GetAll()
         {
             return Context.Set<Event>()
-                          .Include(m => m.FilePaths)
-                          .Include(m => m.Entries)
-                          .OrderByDescending(f => f.StartDT)
-                          .ToList();
+                .Include(m => m.FilePaths)
+                .Include(m => m.Entries)
+                .OrderByDescending(f => f.StartDT)
+                .ToList();
         }
 
-        public async Task<IEnumerable<Event>> GetAllAsync()
+        public async Task<ICollection<Event>> GetAllAsync()
         {
             List<Event> @events = await Context.Set<Event>()
-                                               .Include(e => e.FilePaths)
-                                               .Include(e => e.Entries)
-                                               .OrderByDescending(f => f.StartDT)
-                                               .ToListAsync();
+                .Include(e => e.FilePaths)
+                .Include(e => e.Entries)
+                .OrderByDescending(f => f.StartDT)
+                .ToListAsync();
             return @events;
         }
 
-        public async Task<IEnumerable<Event>> GetAllPast()
+        public async Task<ICollection<Event>> GetAllPast()
         {
             return await Context.Set<Event>()
-                                .Include(m => m.FilePaths)
-                                .Include(m => m.Entries)
-                                .Where(ev => ev.EndDT < DateTime.Now)
-                                .ToListAsync();
+                .Include(m => m.FilePaths)
+                .Include(m => m.Entries)
+                .Where(ev => ev.EndDT < DateTime.Now)
+                .ToListAsync();
         }
 
-        public async Task<IEnumerable<Event>> GetAllCurrent()
-        {            return await Context.Set<Event>()
-                                .Include(m => m.FilePaths)
-                                .Include(m => m.Entries)
-                                .Where(ev => ev.EndDT <= DateTime.Now.AddDays(14))
-                                .OrderByDescending(ev => ev.StartDT)
-                                .ToListAsync();
+        public async Task<ICollection<Event>> GetAllCurrent()
+        {
+            return await Context.Set<Event>()
+                .Include(m => m.FilePaths)
+                .Include(m => m.Entries)
+                .Where(ev => ev.EndDT <= DateTime.UtcNow.AddDays(14))
+                .OrderByDescending(ev => ev.StartDT)
+                .ToListAsync();
         }
 
         public async Task AddAsync(Event @event)

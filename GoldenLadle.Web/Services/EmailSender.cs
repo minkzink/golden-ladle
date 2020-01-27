@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using GoldenLadle.Web.Extensions;
+using Microsoft.Extensions.Options;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace GoldenLadle.Services
 {
@@ -9,9 +11,23 @@ namespace GoldenLadle.Services
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string message)
+        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
-            return Task.CompletedTask;
+            Options = optionsAccessor.Value;
+        }
+        public AuthMessageSenderOptions Options { get; }
+        public Task SendEmailAsync(string email, string subject, string message) =>
+            Execute(Options.SendGridKey, subject, message, email);
+
+        public async Task Execute(string apiKey, string subject, string message, string email)
+        {
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("ben@brinehartdesign.com", "Ben Rinehart");
+            var to = new EmailAddress(email, email);
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, message.ToString(), message);
+
+            var response = await client.SendEmailAsync(msg);
+            Console.WriteLine($"SendGrid Response: {response}");
         }
     }
 }

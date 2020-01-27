@@ -7,9 +7,9 @@ namespace GoldenLadle.Data.Interfaces
     public interface IEventsRepository : IRepository<Event>
     {
         Task<Event> GetAsync(int? id);
-        Task<IEnumerable<Event>> GetAllAsync();
-        Task<IEnumerable<Event>> GetAllPast();
-        Task<IEnumerable<Event>> GetAllCurrent();
+        Task<ICollection<Event>> GetAllAsync();
+        Task<ICollection<Event>> GetAllPast();
+        Task<ICollection<Event>> GetAllCurrent();
         Event SetDates(Event @event, SaveType saveType);
         Task AddAsync(Event @event);
         void Update(Event @event);
