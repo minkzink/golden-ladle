@@ -72,6 +72,12 @@
                                                     <button class="btn btn-block btn-outline-success  vote1 disabled" id="vote1_@entry.Id" value="3"><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
                                                 </p>
                                             }
+                                            else if (entry.UserId == ViewBag.LoggedInUser)
+                                            {
+                                                <p class="vote1-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="You Can't Vote for your own soup." tabindex="0">
+                                                    <button class="btn btn-block btn-outline-success vote1 disabled" id="vote1_@entry.Id" value="3" disabled><i class="fas fa-thumbs-up text-left"></i> Vote #1</button>
+                                                </p>
+                                            }
                                             else if (!entry.Votes.Any(v => v.Value == 3 && v.UserId == ViewBag.LoggedInUser) && i == 1)
                                             {
                                                 <p class="vote1-tooltip" tabindex="0">
@@ -93,6 +99,12 @@
                                                     <button class="btn btn-block btn-outline-success  vote2 disabled" id="vote2_@entry.Id" value="2"><i class="fas fa-thumbs-up text-left"></i> Vote #2</button>
                                                 </p>
                                             }
+                                            else if (entry.UserId == ViewBag.LoggedInUser)
+                                            {
+                                                <p class="vote2-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="You Can't Vote for your own soup." tabindex="0">
+                                                    <button class="btn btn-block btn-outline-success vote3 disabled" id="vote2_@entry.Id" value="2" disabled><i class="fas fa-thumbs-up text-left"></i> Vote #2</button>
+                                                </p>
+                                            }
                                             else if (!entry.Votes.Any(v => v.Value == 2 && v.UserId == ViewBag.LoggedInUser))
                                             {
                                                 <p class="vote2-tooltip" tabindex="0">
@@ -112,6 +124,12 @@
                                             {
                                                 <p class="vote3-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="You Can't Vote for #3 more than once." tabindex="0">
                                                     <button class="btn btn-block btn-outline-success  vote1 disabled" id="vote3_@entry.Id" value="1"><i class="fas fa-thumbs-up text-left"></i> Vote #3</button>
+                                                </p>
+                                            }
+                                            else if (entry.UserId == ViewBag.LoggedInUser)
+                                            {
+                                                <p class="vote3-tooltip" data-toggle="tooltip" data-html="true" data-placement="top" title="You Can't Vote for your own soup." tabindex="0">
+                                                    <button class="btn btn-block btn-outline-success vote3 disabled" id="vote3_@entry.Id" value="1" disabled><i class="fas fa-thumbs-up text-left"></i> Vote #3</button>
                                                 </p>
                                             }
                                             else if (!entry.Votes.Any(v => v.Value == 1 && v.UserId == ViewBag.LoggedInUser) && i == 3)
