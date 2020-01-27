@@ -65,6 +65,8 @@ namespace GoldenLadle.Controllers
             {
                 return NotFound();
             }
+            @event.StartDT = @event.StartDT.ConvertTimeToLocal("America/New_York");
+            @event.EndDT = @event.EndDT.ConvertTimeToLocal("America/New_York");
             return View(@event);
         }
 
