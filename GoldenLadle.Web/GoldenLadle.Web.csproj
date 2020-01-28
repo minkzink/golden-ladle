@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>fa30cacd-05d3-452e-a3aa-a71b18b1e9cf</UserSecretsId>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>GoldenLadle</AssemblyName>
@@ -18,11 +18,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.2" />
-    <PackageReference Include="NodaTime" Version="2.4.7" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="NodaTime" Version="3.0.0-beta01" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
     <PackageReference Include="CloudinaryDotNet" Version="1.9.1" />
-    <PackageReference Include="SendGrid" Version="9.12.5" />
+    <PackageReference Include="SendGrid" Version="9.12.6" />
   </ItemGroup>
     
 </Project>
