@@ -7,6 +7,7 @@ using GoldenLadle.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace GoldenLadle
@@ -20,10 +21,13 @@ namespace GoldenLadle
                 .Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                   .UseUrls("http://+:5000;https://+:5001")
-                   .UseStartup<Startup>()
-                   .ConfigureKestrel(options => options.ListenAnyIP(Int32.Parse(Environment.GetEnvironmentVariable("PORT"))));
+        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseUrls("http://+:5000;https://+:5001");
+                webBuilder.UseStartup<Startup>();
+                webBuilder.ConfigureKestrel(options => options.ListenAnyIP(Int32.Parse(Environment.GetEnvironmentVariable("PORT"))));
+            });
     }
 }

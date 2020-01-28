@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace GoldenLadle.Controllers
 {
@@ -21,10 +22,10 @@ namespace GoldenLadle.Controllers
     public class EventsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IHostingEnvironment env;
+        private readonly IWebHostEnvironment env;
         private string _path = "";
 
-        public EventsController(IUnitOfWork unitOfWork, IHostingEnvironment env)
+        public EventsController(IUnitOfWork unitOfWork, IWebHostEnvironment env)
         {
             this.env = env;
             _unitOfWork = unitOfWork;

@@ -11,11 +11,12 @@
            "preLaunchTask": "build",
            "program": "${workspaceFolder}/GoldenLadle.Web/bin/Debug/netcoreapp2.2/GoldenLadle.dll",
            "args": [],
-           "cwd": "${workspaceFolder}",
+           "cwd": "${workspaceFolder}/GoldenLadle.Web",
            "stopAtEntry": false,
            "console": "internalConsole",
            "env": {
-               "PORT": "5001"
+               "PORT": "5002",
+               "ASPNETCORE_ENVIRONMENT": "Development"
            }
        },
         {

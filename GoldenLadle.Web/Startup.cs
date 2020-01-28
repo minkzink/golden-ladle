@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace GoldenLadle
 {
@@ -27,11 +28,6 @@ namespace GoldenLadle
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IServiceProvider serviceProvider = services.BuildServiceProvider();
-            IHostingEnvironment env = serviceProvider.GetService<IHostingEnvironment>();
-            string envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            if (envName != "")env.EnvironmentName = envName;
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => false;
@@ -62,16 +58,15 @@ namespace GoldenLadle
             services.AddAuthentication()
                 .AddCookie("Cookie", opt => opt.SlidingExpiration = true);
 
-            services.AddMvc();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -82,13 +77,12 @@ namespace GoldenLadle
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseRouting();
+            app.UseAuthorization();
             app.UseAuthentication();
-
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
         }

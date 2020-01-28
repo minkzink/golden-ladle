@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS base
 WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /src
 COPY GoldenLadle.sln ./
 COPY GoldenLadle.Web/GoldenLadle.Web.csproj GoldenLadle.Web/
